@@ -128,7 +128,6 @@ public class YuGongController extends AbstractYuGongLifeCycle {
         int threadSize = 1; // 默认1，代表串行
         if (concurrent) {
             threadSize = config.getInt("yugong.table.concurrent.size", 5); // 并行执行的table数
-
         }
 
         tableController = new TableController(tableMetas.size(), threadSize);
@@ -585,6 +584,7 @@ public class YuGongController extends AbstractYuGongLifeCycle {
             }
         } else {
             List<Table> metas = TableMetaGenerator.getTableMetasWithoutColumn(globalContext.getSourceDs(), null, null);
+            logger.info("TableMetaGenerator.getTableMetasWithoutColumn获取数据量{}",metas.size());
             for (Table table : metas) {
                 if (!isBlackTable(table.getName(), tableBlackList)
                     && !isBlackTable(table.getFullName(), tableBlackList)) {

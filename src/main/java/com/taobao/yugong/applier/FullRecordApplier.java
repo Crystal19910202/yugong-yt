@@ -43,6 +43,16 @@ public class FullRecordApplier extends AbstractRecordApplier {
     protected DbType                          dbType;
     protected boolean                         useMerge = false;
 
+    protected static Map typeDefaults=new HashMap();
+
+    static {
+        typeDefaults.put(12,"");
+        typeDefaults.put(3,0);
+        typeDefaults.put(1,"");
+        //typeDefaults.put(93," 00:00:00");
+
+    }
+
     public FullRecordApplier(YuGongContext context){
         this.context = context;
     }
@@ -107,12 +117,18 @@ public class FullRecordApplier extends AbstractRecordApplier {
                         // 先加字段，后加主键
                         List<ColumnValue> cvs = record.getColumns();
                         for (ColumnValue cv : cvs) {
+                            if(cv.getValue() == null) {
+                                cv.setValue(typeDefaults.get(cv.getColumn().getType()));
+                            }
                             ps.setObject(getIndex(indexs, cv), cv.getValue(), cv.getColumn().getType());
                         }
 
                         // 添加主键
                         List<ColumnValue> pks = record.getPrimaryKeys();
                         for (ColumnValue pk : pks) {
+                            //if(pk.getValue() == null) {
+                            //    pk.setValue(typeDefaults.get(pk.getColumn().getType()));
+                            //}
                             ps.setObject(getIndex(indexs, pk), pk.getValue(), pk.getColumn().getType());
                         }
 
@@ -150,11 +166,17 @@ public class FullRecordApplier extends AbstractRecordApplier {
                     // 先加字段，后加主键
                     List<ColumnValue> cvs = record.getColumns();
                     for (ColumnValue cv : cvs) {
+                        if(cv.getValue() == null) {
+                            cv.setValue(typeDefaults.get(cv.getColumn().getType()));
+                        }
                         ps.setObject(getIndex(indexs, cv), cv.getValue(), cv.getColumn().getType());
                     }
 
                     // 添加主键
                     for (ColumnValue pk : pks) {
+                        //if(pk.getValue() == null) {
+                        //    pk.setValue("");
+                        //}
                         ps.setObject(getIndex(indexs, pk), pk.getValue(), pk.getColumn().getType());
                     }
 

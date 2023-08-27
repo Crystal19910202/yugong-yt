@@ -103,6 +103,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--maven properties -->
         <downloadSources>true</downloadSources>
+        <maven.test.skip>true</maven.test.skip>
         <!-- compiler settings properties -->
         <java_source_version>1.8</java_source_version>
         <java_target_version>1.8</java_target_version>
@@ -163,7 +164,7 @@
             <artifactId>ojdbc14</artifactId>
             <version>10.2.0.3.0</version>
             <scope>system</scope>
-            <systemPath>${user.dir}/lib/ojdbc14-10.2.0.3.0.jar</systemPath>
+            <systemPath>D:/idea-workspace/yugong-yt/lib/ojdbc14-10.2.0.3.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>commons-configuration</groupId>
@@ -233,6 +234,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -245,6 +247,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
                 <configuration>
                     <encoding>${file_encoding}</encoding>
                     <charset>${file_encoding}</charset>
@@ -408,6 +411,7 @@
                     <plugin>
                         <artifactId>exec-maven-plugin</artifactId>
                         <groupId>org.codehaus.mojo</groupId>
+                        <version>1.6.0</version>
                         <executions>
                             <execution><!-- Run our version calculation script -->
                                 <id>Version Calculation</id>

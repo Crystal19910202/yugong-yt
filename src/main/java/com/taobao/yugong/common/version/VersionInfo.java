@@ -7,6 +7,7 @@ public class VersionInfo {
     private static Package                 myPackage;
     private static YuGongVersionAnnotation version;
 
+
     static {
         myPackage = YuGongVersionAnnotation.class.getPackage();
         version = myPackage.getAnnotation(YuGongVersionAnnotation.class);
@@ -35,7 +36,6 @@ public class VersionInfo {
     public static String getHexVevision() {
         return (version != null) ? version.hexVersion() : "Unknown";
     }
-
     public static String getBuildVersion() {
         StringBuilder buf = new StringBuilder();
 
