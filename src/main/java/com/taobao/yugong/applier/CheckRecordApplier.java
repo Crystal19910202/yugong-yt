@@ -398,12 +398,20 @@ public class CheckRecordApplier extends AbstractRecordApplier {
                     int index = 1;
                     Map<String, Integer> indexs = new HashMap<String, Integer>();
                     for (String column : primaryKeys) {
+                        if("prkeyid".equalsIgnoreCase(column)){
+                            // prkeyid跳过
+                            continue;
+                        }
                         indexs.put(column, index);
                         index++;
                     }
 
                     if (index == 1) { // 没有主键
                         for (String column : columns) {
+                            if("prkeyid".equalsIgnoreCase(column)){
+                                // prkeyid跳过
+                                continue;
+                            }
                             indexs.put(column, index);
                             index++;
                         }
