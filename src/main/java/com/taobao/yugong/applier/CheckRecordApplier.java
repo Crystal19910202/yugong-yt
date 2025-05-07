@@ -143,6 +143,11 @@ public class CheckRecordApplier extends AbstractRecordApplier {
                 for (Record record : batchRecords) {
                     int count = 0;
                     for (ColumnValue pk : record.getPrimaryKeys()) {
+                        if("prkeyid".equalsIgnoreCase(pk.getColumn().getName())){
+                            // 新增的特殊字段需要过滤
+                            continue;
+                        }
+
                         // 源库和目标的库主键信息可能不一致
                         Integer index = getIndex(indexs, pk, true);
                         if (index != null) {
@@ -152,6 +157,10 @@ public class CheckRecordApplier extends AbstractRecordApplier {
                     }
 
                     for (ColumnValue col : record.getColumns()) {
+                        if("prkeyid".equalsIgnoreCase(col.getColumn().getName())){
+                            // 新增的特殊字段需要过滤
+                            continue;
+                        }
                         // 源库和目标的库主键信息可能不一致
                         Integer index = getIndex(indexs, col, true);
                         if (index != null) {
@@ -175,11 +184,21 @@ public class CheckRecordApplier extends AbstractRecordApplier {
                     // 需要和源库转义后的record保持相同的primary/column顺序，否则对比会失败
                     for (ColumnMeta pk : primaryKeys) {
                         ColumnValue cv = getColumnValue(rs, getTargetEncoding(), pk);
+                        //TODO 过滤无用的数值
+                        if("prkeyid".equalsIgnoreCase(pk.getName())){
+                            // 新增的特殊字段需要过滤
+                            continue;
+                        }
                         pks.add(cv);
                     }
 
                     for (ColumnMeta col : columns) {
                         ColumnValue cv = getColumnValue(rs, getTargetEncoding(), col);
+                        //TODO 过滤无用的数值
+                        if("prkeyid".equalsIgnoreCase(col.getName())){
+                            // 新增的特殊字段需要过滤
+                            continue;
+                        }
                         cms.add(cv);
                     }
 

@@ -11,10 +11,10 @@ public class BaseDbTest {
 
     public DataSourceConfig getOracleConfig() {
         DataSourceConfig config = new DataSourceConfig();
-        config.setUsername("test");
-        config.setPassword("test");
-        config.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:test");
-        config.setEncode("UTF-8");
+        config.setUsername("sgeb");
+        config.setPassword("sgeb");
+        config.setUrl("jdbc:oracle:thin:@127.0.0.1:1521:orcl");
+        config.setEncode("ZHS16GBK");
         config.setType(DbType.ORACLE);
 
         return config;
@@ -22,9 +22,9 @@ public class BaseDbTest {
 
     public DataSourceConfig getMysqlConfig() {
         DataSourceConfig config = new DataSourceConfig();
-        config.setUsername("test");
-        config.setPassword("test");
-        config.setUrl("jdbc:mysql://127.0.0.1:3306");
+        config.setUsername("sgeb");
+        config.setPassword("sgeb");
+        config.setUrl("jdbc:mysql://127.0.0.1:3306/sgeb");
         config.setEncode("UTF-8");
         config.setType(DbType.MYSQL);
 

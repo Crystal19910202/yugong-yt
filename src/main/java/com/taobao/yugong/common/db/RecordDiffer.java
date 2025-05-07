@@ -84,6 +84,24 @@ public class RecordDiffer {
             return true;
         }
 
+        if(value1 instanceof String && value2 instanceof String){
+            if(StringUtils.isBlank((String) value1)&&StringUtils.isBlank((String) value2)){
+                return true;
+            }
+        }
+
+        if(value2 instanceof String){
+            if(value1==null&&StringUtils.isBlank((String) value2)){
+                return true;
+            }
+        }
+
+        if(value1 instanceof String){
+            if(value2==null&&StringUtils.isBlank((String) value1)){
+                return true;
+            }
+        }
+
         StringBuilder message = new StringBuilder();
         message.append(column1.getColumn())
             .append(" , values : [")
